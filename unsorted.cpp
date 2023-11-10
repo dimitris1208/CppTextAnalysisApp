@@ -1,3 +1,4 @@
+
 #include "unsorted.h"
 #include <chrono>
 #include <unistd.h>
@@ -5,7 +6,9 @@
 #include <iostream>
 using namespace std ;
 
-//κατασκευαστής
+/* Implements the methods declared in the uns class in unsorted.h. */
+
+// Initializes the uns class object with the provided data.
 uns::uns(string * pairs ,unsigned long int totalpairs,int * Num,int q,string * randomwords){
     this->totalpairs=totalpairs;
     this->Q=q;
@@ -26,22 +29,31 @@ uns::~uns(){
     delete []unsArr;
 }
 
-//σειριακή αναζήτηση στον πινακα
+/* Performs a sequential search for each random pair in the unsorted array (unsArr).
+*/
+
+
+
 void uns::searchUnsorted(){
 ofstream fout;
-fout.open("test1.txt");
+fout.open("results.txt");
 auto start = chrono::steady_clock::now();
 bool flag=true;
 for(int j = 0 ; j < Q ; j++){
     for(unsigned int i = 0  ; i < totalpairs && flag; i++){
         if (randomw[j]==unsArr[i]){
             flag=false;
-            fout<<randomw[j]<<" Appears: "<<num[j]<<" times "<<endl;
+            fout<<randomw[j]<<" || Appears: "<<num[j]<<" times "<<endl;
         }
 
     }
 flag=true;
 }
+
+/* Records the time taken for the search operation in nanoseconds, microseconds, milliseconds, and seconds. Also records
+the time taken for the search operation in nanoseconds, microseconds, milliseconds, and seconds. */
+
+
 auto end = chrono::steady_clock::now();
 fout<<"Time taken to find "<<Q<<" pairs in unsorted array structure :"<<endl;
  fout << "Elapsed time in nanoseconds: "
@@ -50,7 +62,7 @@ fout<<"Time taken to find "<<Q<<" pairs in unsorted array structure :"<<endl;
 
     fout << "Elapsed time in microseconds: "
         << chrono::duration_cast<chrono::microseconds>(end - start).count()
-        << " µs" << endl;
+        << " Βµs" << endl;
 
     fout << "Elapsed time in milliseconds: "
         << chrono::duration_cast<chrono::milliseconds>(end - start).count()
